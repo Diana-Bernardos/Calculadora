@@ -1,0 +1,220 @@
+/* Estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    padding: 20px;
+}
+
+/* Animaciones del fondo */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Estilos de la calculadora */
+.calculadora {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: aparecer 0.5s ease-out, float 6s ease-in-out infinite;
+    position: relative;
+}
+
+/* Animaciones de la calculadora */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Estilos de la pantalla */
+.pantalla {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: brilloPantalla 2s linear infinite;
+}
+
+@keyframes brilloPantalla {
+    0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+    100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.1); }
+}
+
+.pantalla::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    animation: scanline 2s linear infinite;
+}
+
+@keyframes scanline {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.valor-anterior {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 18px;
+    margin-bottom: 8px;
+    min-height: 24px;
+    transition: all 0.3s ease;
+}
+
+.valor-actual {
+    color: #fff;
+    font-size: 42px;
+    font-weight: 300;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Estilos de los botones */
+.botones {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+button {
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: vibrar 0.3s ease-in-out;
+}
+
+@keyframes vibrar {
+    0%, 100% { transform: translateY(-3px) rotate(0); }
+    25% { transform: translateY(-3px) rotate(-1deg); }
+    75% { transform: translateY(-3px) rotate(1deg); }
+}
+
+/* Estilos específicos para tipos de botones */
+.operador {
+    background: linear-gradient(135deg, #6c5ce7, #a178df);
+}
+
+.funcion {
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.igual {
+    background: linear-gradient(135deg, #ff6b6b, #ffa502);
+    font-weight: 600;
+}
+
+.borrar {
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    font-weight: 600;
+}
+
+/* Efecto Ripple */
+.ripple {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Efecto de partículas */
+.particula {
+    position: absolute;
+    pointer-events: none;
+    background: white;
+    border-radius: 50%;
+    animation: explotar 1s ease-out forwards;
+}
+
+@keyframes explotar {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .calculadora {
+        padding: 15px;
+    }
+
+    .botones {
+        gap: 8px;
+    }
+
+    button {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .valor-actual {
+        font-size: 36px;
+    }
+}
